@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
   con.getConnection(function (err, tempconnection) {
     if (err) { res.send("Error occured!"); }
     else {
-      var sql = "SELECT orderid AS 'Order ID', ordertotalprice AS 'Total Price', orderquantity AS 'Order Quantity', orderstatus AS 'Status', orderdate AS 'Order Date', agentid AS 'Agent ID' FROM orders";
+      var sql = "SELECT orderid AS 'Order ID', ordertotalprice AS 'Total Price', orderquantity AS 'Order Quantity', orderstatus AS 'Status', TO_DATE(orderdate, 'dd,mm,YYYY')AS 'Order Date', agentid AS 'Agent ID' FROM orders";
       con.query(sql, function (err, result, fields) {
         if (err) { throw err; }
         else {
