@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
   con.getConnection(function (err, tempconnection) {
     if (err) { res.send("Error occured!"); }
     else {
-      var sql = "SELECT orderid AS 'Order ID', ordertotalprice AS 'Total Price', orderquantity AS 'Order Quantity', orderstatus AS 'Status', DATE_FORMAT(orderdate, '%d-%m-%Y')AS 'Order Date', agentid AS 'Agent ID' FROM orders";
+      var sql = "SELECT orderid AS 'Order ID', ROUND(ordertotalprice,2) AS 'Total Price', orderquantity AS 'Order Quantity', orderstatus AS 'Status', DATE_FORMAT(orderdate, '%d-%m-%Y')AS 'Order Date', agentid AS 'Agent ID' FROM orders";
       con.query(sql, function (err, result, fields) {
         if (err) { throw err; }
         else {
@@ -30,6 +30,6 @@ app.get('/', (req, res) => {
   });
 });
 
-app.listen(process.env.PORT || 4008, () => {
+app.listen(process.env.PORT||4008, () => {
     console.log('Listening ok dah jadi.');
 });
